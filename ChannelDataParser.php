@@ -1,9 +1,11 @@
 <?php
 
+$dbh = new PDO('mysql:host=192.168.43.29;dbname=hackaton_jelly', "userJelly", "mdpJelly");
+// utiliser la connexion ici
+$sth = $dbh->query('SELECT * FROM foo');
+
 $lstChaines = ["@gamology", "@ohmygoal", "@beautylicious", "@beautyhacks", "@beautywow", "@thisjusthappened",
     "@abcdiyus", "@naturee", "@namemeifyoucan"];
-
-
 
 $urlPart1 = "https://www.tiktok.com/node/share/user/";
 
@@ -43,15 +45,21 @@ foreach ($lstChaines as $uneChaine) {
         //echo $response;
 
         $jsonArray = json_decode($response);
-        echo $jsonArray->body->userData->secUid . "\n";
-        echo $jsonArray->body->userData->userId . "\n";
-        echo $jsonArray->body->userData->uniqueId . "\n";
-        echo $jsonArray->body->userData->nickName . "\n";
-        echo $jsonArray->body->userData->following . "\n";
-        echo $jsonArray->body->userData->fans . "\n";
-        echo $jsonArray->body->userData->heart . "\n";
-        echo $jsonArray->body->userData->video . "\n";
-        echo $jsonArray->body->userData->verified . "\n";
+        $secUid = $jsonArray->body->userData->secUid;
+        $userId = (int) $jsonArray->body->userData->userId;
+        $uniqueId = $jsonArray->body->userData->uniqueId;
+        $nickName = $jsonArray->body->userData->nickName;
+        $following = $jsonArray->body->userData->following;
+        $fans = $jsonArray->body->userData->fans;
+        $heart = $jsonArray->body->userData->heart;
+        $video = $jsonArray->body->userData->video;
+        $verified = $jsonArray->body->userData->verified;
+
+        $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) 
+        VALUES ('.$secUid.','.$userId.',"'.$uniqueId.'","'.$nickName.'")');
+
+        //$sth = $dbh->query('INSERT INTO `channel_metrics`(`following`, `fans`, `heart`, `video`, `verified`)
+        //VALUES ('.$following.','.$fans.',"'.$heart.'","'.$video.', "'.$verified.'")');
     }
 }
 
