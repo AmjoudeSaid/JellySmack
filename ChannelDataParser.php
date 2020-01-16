@@ -41,4 +41,6 @@ if ($err) {
     echo $response;
 }
 $jsonArray = json_decode($response);
-echo $jsonArray;
+foreach ($jsonArray as $key => $value) {
+    echo $key . $value;
+}
