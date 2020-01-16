@@ -33,6 +33,9 @@ if ($err) {
     //echo $response;
     
     $jsonArray = json_decode($response);
-    echo $jsonArray->body->userData->fans;
+    $fan = $jsonArray->body->userData->fans;
+    $following = $jsonArray->body->userData->following;
+    $heart = $jsonArray->body->userData->heart;
+    $video = $jsonArray->body->userData->video;
 }
 ?>
