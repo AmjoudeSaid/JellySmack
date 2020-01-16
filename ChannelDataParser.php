@@ -1,11 +1,8 @@
 <?php
-
-$dbh = new PDO('mysql:host=192.168.43.29;dbname=hackaton_jelly', "userJelly", "mdpJelly");
-// utiliser la connexion ici
-$sth = $dbh->query('SELECT * FROM foo');
+require_once("SPDO.php");
 
 $lstChaines = ["@gamology", "@ohmygoal", "@beautylicious", "@beautyhacks", "@beautywow", "@thisjusthappened",
-    "@abcdiyus", "@naturee", "@namemeifyoucan"];
+    "@abcdiyus", "@naturee", "@namemeifyoucan", "@tiboinshape"];
 
 $urlPart1 = "https://www.tiktok.com/node/share/user/";
 
@@ -54,14 +51,25 @@ foreach ($lstChaines as $uneChaine) {
         $heart = $jsonArray->body->userData->heart;
         $video = $jsonArray->body->userData->video;
         $verified = $jsonArray->body->userData->verified;
+        if($verified=="true")
+            $verified=1;
+        else
+            $verified=0;
+            
+        //if ($sth = $dbh->query('SELECT COUNT(*) FROM channel') == 0) {
+            SPDO::getInstance()->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) VALUES ("' . $secUid . '","' . $userId . '","' . $uniqueId . '","' . $nickName . '")');
+            foreach (SPDO::getInstance()->query('SELECT `id` FROM `channel` WHERE `uniqueId`="'.$uniqueId.'"') as $membre)
+                {
+                $idchannel = $membre['id'];
+                }
+            //$idchannel = SPDO::getInstance()->query('SELECT `id` FROM `channel` WHERE `uniqueId`="'.$uniqueId.'"');
+            var_dump($idchannel);
+            //}
+        //SELECT `id` FROM `channel` WHERE `uniqueId`="ohmygoal"
+        $test =SPDO::getInstance()->query('INSERT INTO `channel_metrics`(`idChannel`,`following`, `fans`, `heart`, `video`, `verified`)
+        VALUES ('.$idchannel.','.$following.','.$fans.','.$heart.','.$video.','.$verified.')');
 
-        if ($sth = $dbh->query('SELECT COUNT(*) FROM channel') == 0) {
-            $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) 
-            VALUES ("'.$secUid.'","'.$userId.'","'.$uniqueId.'","'.$nickName.'")');
-        }
-
-        //$sth = $dbh->query('INSERT INTO `channel_metrics`(`following`, `fans`, `heart`, `video`, `verified`)
-        //VALUES ('.$following.','.$fans.',"'.$heart.'","'.$video.', "'.$verified.'")');
+        var_dump($test);
     }
 }
 
