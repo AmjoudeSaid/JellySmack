@@ -46,7 +46,7 @@ foreach ($lstChaines as $uneChaine) {
 
         $jsonArray = json_decode($response);
         $secUid = $jsonArray->body->userData->secUid;
-        $userId = (int) $jsonArray->body->userData->userId;
+        $userId = $jsonArray->body->userData->userId;
         $uniqueId = $jsonArray->body->userData->uniqueId;
         $nickName = $jsonArray->body->userData->nickName;
         $following = $jsonArray->body->userData->following;
@@ -56,7 +56,7 @@ foreach ($lstChaines as $uneChaine) {
         $verified = $jsonArray->body->userData->verified;
 
         $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) 
-        VALUES ('.$secUid.','.$userId.',"'.$uniqueId.'","'.$nickName.'")');
+        VALUES ("'.$secUid.'","'.$userId.'","'.$uniqueId.'","'.$nickName.'")');
 
         //$sth = $dbh->query('INSERT INTO `channel_metrics`(`following`, `fans`, `heart`, `video`, `verified`)
         //VALUES ('.$following.','.$fans.',"'.$heart.'","'.$video.', "'.$verified.'")');
