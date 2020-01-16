@@ -1,4 +1,9 @@
 <?php
+//require_once('SPDO.php');
+
+$dbh = new PDO('mysql:host=192.168.43.29;dbname=hackaton_jelly', "userJelly", "mdpJelly");
+// utiliser la connexion ici
+$sth = $dbh->query('SELECT * FROM foo');
 
 $curl = curl_init();
 
@@ -43,8 +48,16 @@ if ($err) {
     $uniqueId = $jsonArray->body->userData->uniqueId;
     $nickName = $jsonArray->body->userData->nickName;
 
-    SPDO::getInstance()->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) VALUES (597,597,hefbgfe,feubfi)');
+    $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) VALUES ('.$secUid.','.$userId.',"'.$uniqueId.'","'.$nickName.'")');
 
-    echo "fan : ".$fan."\r\n". "following : ".$following."\n";
+    /*$this->_sql = "INSERT INTO channel (secuId, userId,uniqueId,nickname) VALUES (:secuId, :userId, :uniqueId, :nickname)";
+            $this->_statement = $this->_db->prepare($this->_sql);
+            $this->_statement->bindParam(':secuId', $secUid);
+            $this->_statement->bindParam(':userId', $userId);
+            $this->_statement->bindParam(':uniqueId', $uniqueId);
+            $this->_statement->bindParam(':nickname', $nickName);
+            $this->_statement->execute();*/
+
+    //echo "fan : ".$fan."\r\n". "following : ".$following."\n";
 }
 ?>
