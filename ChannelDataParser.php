@@ -55,8 +55,10 @@ foreach ($lstChaines as $uneChaine) {
         $video = $jsonArray->body->userData->video;
         $verified = $jsonArray->body->userData->verified;
 
-        $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) 
-        VALUES ("'.$secUid.'","'.$userId.'","'.$uniqueId.'","'.$nickName.'")');
+        if ($sth = $dbh->query('SELECT COUNT(*) FROM channel') == 0) {
+            $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) 
+            VALUES ("'.$secUid.'","'.$userId.'","'.$uniqueId.'","'.$nickName.'")');
+        }
 
         //$sth = $dbh->query('INSERT INTO `channel_metrics`(`following`, `fans`, `heart`, `video`, `verified`)
         //VALUES ('.$following.','.$fans.',"'.$heart.'","'.$video.', "'.$verified.'")');
