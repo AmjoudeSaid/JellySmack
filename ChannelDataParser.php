@@ -4,13 +4,14 @@ $lstChaines = ["@gamology", "@ohmygoal", "@beautylicious", "@beautyhacks", "@bea
     "@abcdiyus", "@naturee", "@namemeifyoucan", "@boysdoitto"];
 
 
-$curl = curl_init();
+
 $urlPart1 = "https://www.tiktok.com/node/share/user/";
 
 foreach ($lstChaines as $uneChaine) {
     $chaine = $uneChaine;
     $url = $urlPart1 . $chaine;
-
+    $curl = curl_init();
+    
     curl_setopt_array($curl, array(
         CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
