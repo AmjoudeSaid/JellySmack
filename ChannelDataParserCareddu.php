@@ -30,7 +30,9 @@ curl_close($curl);
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
-  	echo $response;
+    //echo $response;
+    
+    $jsonArray = json_decode($response);
+    echo $jsonArray->body->userData->fans;
 }
-//test
 ?>
