@@ -33,9 +33,18 @@ if ($err) {
     //echo $response;
     
     $jsonArray = json_decode($response);
-    $fan = $jsonArray->body->userData->fans;
+    /*$fan = $jsonArray->body->userData->fans;
     $following = $jsonArray->body->userData->following;
     $heart = $jsonArray->body->userData->heart;
-    $video = $jsonArray->body->userData->video;
+    $video = $jsonArray->body->userData->video;*/
+
+    $secUid = 597;
+    $userId = $jsonArray->body->userData->userId;
+    $uniqueId = $jsonArray->body->userData->uniqueId;
+    $nickName = $jsonArray->body->userData->nickName;
+
+    SPDO::getInstance()->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) VALUES (597,597,hefbgfe,feubfi)');
+
+    echo "fan : ".$fan."\r\n". "following : ".$following."\n";
 }
 ?>
