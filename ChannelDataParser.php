@@ -43,7 +43,15 @@ foreach ($lstChaines as $uneChaine) {
         //echo $response;
 
         $jsonArray = json_decode($response);
+        echo $jsonArray->body->userData->secUid . "\n";
+        echo $jsonArray->body->userData->userId . "\n";
+        echo $jsonArray->body->userData->uniqueId . "\n";
+        echo $jsonArray->body->userData->nickName . "\n";
+        echo $jsonArray->body->userData->following . "\n";
         echo $jsonArray->body->userData->fans . "\n";
+        echo $jsonArray->body->userData->heart . "\n";
+        echo $jsonArray->body->userData->video . "\n";
+        echo $jsonArray->body->userData->verified . "\n";
     }
 }
 
