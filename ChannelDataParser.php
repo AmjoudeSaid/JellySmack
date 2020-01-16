@@ -8,7 +8,8 @@ $chaine = "@gamology";
 $url = $urlPart1 . $chaine;
 $json = file_get_contents($url);
 $jsonArray = json_decode($json);
-
+print_r($jsonArray);
 echo $jsonArray;
+
 
 ?>
