@@ -1,7 +1,7 @@
 <?php
 
 $lstChaines = ["@gamology", "@ohmygoal", "@beautylicious", "@beautyhacks", "@beautywow", "@thisjusthappened",
-    "@abcdiyus", "@naturee", "@namemeifyoucan", "@boysdoitto"];
+    "@abcdiyus", "@naturee", "@namemeifyoucan"];
 
 
 
@@ -11,7 +11,7 @@ foreach ($lstChaines as $uneChaine) {
     $chaine = $uneChaine;
     $url = $urlPart1 . $chaine;
     $curl = curl_init();
-    
+
     curl_setopt_array($curl, array(
         CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
@@ -43,7 +43,7 @@ foreach ($lstChaines as $uneChaine) {
         //echo $response;
 
         $jsonArray = json_decode($response);
-        echo $jsonArray->body->userData->fans;
+        echo $jsonArray->body->userData->fans . "\n";
     }
 }
 
