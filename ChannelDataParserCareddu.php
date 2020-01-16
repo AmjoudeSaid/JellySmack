@@ -43,12 +43,12 @@ if ($err) {
     $heart = $jsonArray->body->userData->heart;
     $video = $jsonArray->body->userData->video;*/
 
-    $secUid = 597;
+    $secUid = $jsonArray->body->userData->secUid;
     $userId = $jsonArray->body->userData->userId;
     $uniqueId = $jsonArray->body->userData->uniqueId;
     $nickName = $jsonArray->body->userData->nickName;
 
-    $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) VALUES ('.$secUid.','.$userId.',"'.$uniqueId.'","'.$nickName.'")');
+    $sth = $dbh->query('INSERT INTO `channel`(`secuId`, `userId`, `uniqueId`, `nickname`) VALUES ("'.$secUid.'",'.(int)$userId.',"'.$uniqueId.'","'.$nickName.'")');
 
     /*$this->_sql = "INSERT INTO channel (secuId, userId,uniqueId,nickname) VALUES (:secuId, :userId, :uniqueId, :nickname)";
             $this->_statement = $this->_db->prepare($this->_sql);
